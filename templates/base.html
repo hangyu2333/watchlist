@@ -14,7 +14,6 @@
     {% endblock %}
   </head>
   <body>
-    <!-- 插入到页面标题上方 -->
     {% for message in get_flashed_messages() %}
     <div class="alert">{{ message }}</div>
     {% endfor %}
@@ -29,12 +28,18 @@
     <nav>
       <ul>
         <li><a href="{{ url_for('index') }}">Home</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('settings') }}">Settings</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
     {% block content %}{% endblock %}
     <footer>
       <small
-        >&copy; 2020
+        >&copy; 2018
         <a href="http://helloflask.com/tutorial">HelloFlask</a></small
       >
     </footer>
